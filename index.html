@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+
+	<!-- Tether -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+
+	<!-- Bootstrap 4 Alpha JS -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+
+	<script type="text/javascript" src="assets/js/bingo.js"></script>	
+</head>
+<body>
+
+	<div class="menu"><div class="container">
+	<h1>Bingo</h1><br/>
+	Valor del cartón:
+	<input type="number" class="form-control n" id="carton" min="1" max="5" value="1"><br/>
+	Jugadores:
+	<input type="number" class="form-control n" id="jugadores" min="5" max="20" value="5">
+	<br/>
+	<button id="comenzar" class="btn btn-primary">Comenzar</button>
+	</div></div>
+	<div class="cuerpo">
+	<div class="modal fade" id="flipFlop" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<span aria-hidden="true">×</span>
+		</button>
+		
+		</div>
+		<div class="modal-body">
+		
+		</div>
+		<div class="modal-footer">
+		<button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
+		</div>
+		</div>
+		</div>
+		</div>
+	<div class="container">
+		
+		<div id="bola"></div>
+		<table id="carton" class="table table-bordered">
+			<tr id="fila1"></tr>
+			<tr id="fila2"></tr>
+			<tr id="fila3"></tr>
+		</table>
+		<button id="bingo" class="btn btn-primary" data-toggle="modal" data-target="#flipFlop">BINGO</button>
+		<br/><br/>
+		<div class="bolsalidas">
+			<!--Aquí van las bolitas que indican que número ha salido ya-->
+		</div>
+	</div>
+	</div>
+
+</body>
+</html>
