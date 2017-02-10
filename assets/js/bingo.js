@@ -8,7 +8,7 @@ $(document).ready(function() {
 
 	for (var i = 1; i <= 90; i++) {
 		$(".bolsalidas").append('<td class="redonda" id="b'+i+'">'+i+'</td>');
-		if(i==30||i==60||i==90){
+		if(i==30||i==60){
 			$(".bolsalidas").append('<br/>');
 		}
 	}
@@ -27,6 +27,7 @@ $(document).ready(function() {
 	var numerosSalidos = new Array();
 	//Array donde guardaré los cartones de todos los oponentes
 	var oponentes = new Array();
+	var filaUlt;
 	
 	$("[type='number']").keypress(function (evt) {
 	    evt.preventDefault();
@@ -47,15 +48,23 @@ $(document).ready(function() {
 		do{
 			var ran3 = Math.floor((Math.random() * 9) + 1);
 		}while(ran3 == ran2 || ran3 == ran);
-		$("#fila1").append('<td class="num" id="'+(i*10+ran)+'">'+(i*10+ran)+'</td>');
-		$("#fila2").append('<td class="num" id="'+(i*10+ran2)+'">'+(i*10+ran2)+'</td>');
-		$("#fila3").append('<td class="num" id="'+(i*10+ran3)+'">'+(i*10+ran3)+'</td>');
+
+		var orden = new Array();
+		orden = [ran, ran2, ran3];
+		orden.sort();
+
+		$("#fila1").append('<td class="num" id="'+(i*10+ran)+'">'+(i*10+orden[0])+'</td>');
+		$("#fila2").append('<td class="num" id="'+(i*10+ran2)+'">'+(i*10+orden[1])+'</td>');
+		$("#fila3").append('<td class="num" id="'+(i*10+ran3)+'">'+(i*10+orden[2])+'</td>');
 	}
 
 	//Quito 4 números por cada fila
 	quita("#fila1");
 	quita("#fila2");
-	quita("#fila3");
+	do{
+		filaUlt = quita("#fila3","#fila2","#fila1");
+	}while(filaUlt==false)
+	
 
 	//Guardo el cartón en el array
 	guardaMiCarton();
@@ -63,12 +72,6 @@ $(document).ready(function() {
 	//Cambio el estilo para tachar un número
 	$(".num").click(function() {
 		$(this).toggleClass('seleccionado');
-		// if($(this).attr('class') == 'num seleccionado'){
-		// 	$(this).replaceWith('<td class="num" id="'+$(this).attr('id')+'"><i class="fa fa-times fa-x3" aria-hidden="true"></i></td>');	
-		// }
-		// else if($(this).attr('class') == 'num'){
-		// 	$(this).replaceWith('<td class="num" id="'+$(this).attr('id')+'">'+$(this).attr('id')+'</td>');
-		// }
 	});
 	
 	$("#bingo").click(Bingo);
@@ -93,25 +96,36 @@ $(document).ready(function() {
 	});
 	//Función para quitar 4 números por cada fila
 	//Se le pasa ID de la fila como parámetro
-	function quita(x){
-		var ran = Math.floor((Math.random() * 8));
+	function quita(x,filaanterior,filaanterior2){
+		var ran = Math.floor((Math.random() * 9));
 		
 		do{
-			var ran2 = Math.floor((Math.random() * 8));
+			var ran2 = Math.floor((Math.random() * 9));
 		}while(ran == ran2);
 		do{
-			var ran3 = Math.floor((Math.random() * 8));
+			var ran3 = Math.floor((Math.random() * 9));
 		}while(ran3 == ran2 || ran3 == ran);
 		do{
-			var ran4 = Math.floor((Math.random() * 8));
+			var ran4 = Math.floor((Math.random() * 9));
 		}while(ran4 == ran2 || ran4 == ran || ran4 == ran3);
-		
+
+		//Compruebo que no se formen columnas de imagen
 		for(var i=0; i<9;i++){
 			if(i == ran || i == ran2 || i == ran3 || i == ran4){
-				$(""+x+" td").eq(i).replaceWith('<td><img class="img-fluid" src="assets/img/bombo.png" /></td>');
+				if($(""+filaanterior+" td").eq(i).attr('class') == "bo" && $(""+filaanterior2+" td").eq(i).attr('class') == "bo"){
+					return false;	
+				} 
 			}
+				
 		}
+		for(var i=0; i<9;i++){
+			if(i == ran || i == ran2 || i == ran3 || i == ran4){
+				$(""+x+" td").eq(i).replaceWith('<td class="bo"><img class="img-fluid" src="assets/img/bombo.png" /></td>');
+			}				
+		}
+		return true;
 	}
+	
 
 
 
