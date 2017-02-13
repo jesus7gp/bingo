@@ -115,14 +115,15 @@ $(document).ready(function() {
 				if($(""+filaanterior+" td").eq(i).attr('class') == "bo" && $(""+filaanterior2+" td").eq(i).attr('class') == "bo"){
 					return false;	
 				} 
-			}
-				
+			}				
 		}
+
 		for(var i=0; i<9;i++){
 			if(i == ran || i == ran2 || i == ran3 || i == ran4){
 				$(""+x+" td").eq(i).replaceWith('<td class="bo"><img class="img-fluid" src="assets/img/bombo.png" /></td>');
 			}				
 		}
+		
 		return true;
 	}
 	
@@ -145,13 +146,11 @@ $(document).ready(function() {
 			}
 		}
 		if(iguales == miCarton.length){
-			//alert("GANAS");
 			clearInterval(temp);
 			$(".modal-body").replaceWith("<div class='modal-body'><i style='color: green' class='fa fa-check fa-5x' aria-hidden='true'></i><br/>¡Has ganado!<br/>El premio asciende a "+Premio(ganadores)+" €</div>");
 			gameover = true;
 		}
 		else{
-			//alert("BINGO INCORRECTO");
 			clearInterval(temp);
 			$(".modal-body").replaceWith("<div class='modal-body'><i style='color: red' class='fa fa-times fa-5x' aria-hidden='true'></i><br/>Bingo incorrecto...</div>");
 			
@@ -180,11 +179,10 @@ $(document).ready(function() {
 			           success: function(resp) {
 			           	$("#bola").hide(0);//Principio de la animación, se oculta el círculo
 			           	$("#bola").html(resp);			       
-			           	//alert(bombo.indexOf(parseInt(resp)));
+			           	
 			           	numerosSalidos.push(resp);
 			           	bombo.splice(bombo.indexOf(parseInt(resp)),1);
-			           	//console.log(bombo);Facilita la comprobación en consola
-			           	//console.log(oponentes)
+			           	
 			           	$("#bola").fadeIn(400);//Aparece con el nuevo número
 			           	$("#b"+resp).hide(0);
 			           	$("#b"+resp).css('background', 'lightcoral');
